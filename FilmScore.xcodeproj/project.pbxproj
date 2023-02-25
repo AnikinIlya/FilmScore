@@ -21,6 +21,7 @@
 		096DD69429A5594300E4F8DB /* FilmDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DD69329A5594300E4F8DB /* FilmDetailsViewModel.swift */; };
 		096DD69929A5617B00E4F8DB /* FilmDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DD69829A5617B00E4F8DB /* FilmDetailsViewController.swift */; };
 		096DD69B29A7B75B00E4F8DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 096DD69A29A7B75B00E4F8DB /* LaunchScreen.storyboard */; };
+		096DD69F29AA75E600E4F8DB /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DD69E29AA75E600E4F8DB /* API.swift */; };
 		097FC47A299932870076CEF0 /* FilmsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FC479299932870076CEF0 /* FilmsListViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		096DD69329A5594300E4F8DB /* FilmDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDetailsViewModel.swift; sourceTree = "<group>"; };
 		096DD69829A5617B00E4F8DB /* FilmDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDetailsViewController.swift; sourceTree = "<group>"; };
 		096DD69A29A7B75B00E4F8DB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		096DD69E29AA75E600E4F8DB /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		097FC479299932870076CEF0 /* FilmsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				096DD64D299A477100E4F8DB /* SeriesCollection.swift */,
+				096DD69E29AA75E600E4F8DB /* API.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				096DD68D29A5042C00E4F8DB /* FilmsListViewController.swift in Sources */,
 				096DD65A299A5E8300E4F8DB /* FilmCellViewModel.swift in Sources */,
 				096DD64E299A477100E4F8DB /* SeriesCollection.swift in Sources */,
+				096DD69F29AA75E600E4F8DB /* API.swift in Sources */,
 				0959FB7F29965ACB00F3A20B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

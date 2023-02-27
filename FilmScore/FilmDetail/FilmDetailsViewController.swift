@@ -16,8 +16,6 @@ class FilmDetailsViewController: UIViewController {
     @IBOutlet var ratingLabel: UILabel!
     @IBOutlet var starsLabel: UILabel!
     @IBOutlet var directorsLabel: UILabel!
-    @IBOutlet var writersLabel: UILabel!
-    @IBOutlet var trailersLabel: UILabel!
     
     //MARK: - Public Properties
     var viewModel: FilmDetailsViewModelProtocol! {
@@ -43,12 +41,11 @@ class FilmDetailsViewController: UIViewController {
         self.title = viewModel.filmTitle
         imageView.image = UIImage(data: viewModel.imageData ?? Data())
         genreLabel.text = viewModel.filmGenre
-        yearAndRuntimeLabel.text = "\(viewModel.filmYear), \(viewModel.filmRuntime) minutes"
+        yearAndRuntimeLabel.text = viewModel.filmYearAndRuntimeLabel
         plotLabel.text = viewModel.filmPlot
-        ratingLabel.text = "\(viewModel.filmRating)/10 ⭐️"
-        starsLabel.text = viewModel.filmStars.replacingOccurrences(of: ", ", with: "\n")
-        directorsLabel.text = viewModel.filmDirectors.replacingOccurrences(of: ", ", with: "\n")
-        writersLabel.text = viewModel.filmWriters.replacingOccurrences(of: ", ", with: "\n")
+        ratingLabel.text = viewModel.filmRating
+        starsLabel.text = viewModel.filmStars
+        directorsLabel.text = viewModel.filmDirectors
     }
     
     private func showActivityIndicator(in view: UIView) -> UIActivityIndicatorView {

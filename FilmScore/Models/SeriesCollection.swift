@@ -15,7 +15,6 @@ struct SeriesById: Decodable {
     let runtimeMins: String
     let plot: String
     let directors: String
-    let writers: String
     let stars: String
     let genres: String
     let imDbRating: String
@@ -89,7 +88,7 @@ struct Genre: Decodable {
     let value: String
 }
 
-struct YouTubeTrailer: Decodable {
+struct Trailer: Decodable {
     let imDbId: String
     let linkEmbed: String
 }

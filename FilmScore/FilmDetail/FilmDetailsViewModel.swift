@@ -11,14 +11,11 @@ protocol FilmDetailsViewModelProtocol {
     var filmTitle: String { get }
     var imageData: Data? { get }
     var filmGenre: String { get }
-    var filmYear: String { get }
-    var filmRuntime: String { get }
+    var filmYearAndRuntimeLabel: String { get }
     var filmPlot: String { get }
     var filmRating: String { get }
     var filmStars: String { get }
     var filmDirectors: String { get }
-    var filmWriters: String { get }
-    var filmTrailers: String { get }
     
     init(seriesId: String)
     
@@ -40,12 +37,8 @@ class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
         series?.genres ?? ""
     }
     
-    var filmYear: String {
-        series?.year ?? ""
-    }
-    
-    var filmRuntime: String {
-        series?.runtimeMins ?? ""
+    var filmYearAndRuntimeLabel: String {
+        "\(series?.year ?? ""), \(series?.runtimeMins ?? "") minutes"
     }
     
     var filmPlot: String {
@@ -53,23 +46,15 @@ class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
     }
     
     var filmRating: String {
-        series?.imDbRating ?? ""
+        "IMDB rating - \(series?.imDbRating ?? "")/10 ⭐️"
     }
     
     var filmStars: String {
-        series?.stars ?? ""
+        series?.stars.replacingOccurrences(of: ", ", with: "\n") ?? ""
     }
     
     var filmDirectors: String {
-        series?.directors ?? ""
-    }
-    
-    var filmWriters: String {
-        series?.writers ?? ""
-    }
-    
-    var filmTrailers: String {
-        series?.writers ?? ""
+        series?.directors.replacingOccurrences(of: ", ", with: "\n") ?? ""
     }
     
     private var seriesId: String
@@ -80,10 +65,23 @@ class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
     }
     
     func fetchFilm(completion: @escaping() -> Void) {
-        NetworkManager.shared.fetchData(by: seriesId) { result in
+        
+        NetworkManager.shared.fetch(dataType: SeriesById.self, from: .title, titleId: seriesId) { result in
             switch result {
             case .success(let data):
                 self.series = data
+                completion()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
+    func fetchTrailer(completion: @escaping() -> Void) {
+        NetworkManager.shared.fetch(dataType: Trailer.self, from: .trailer, titleId: seriesId) { result in
+            switch result {
+            case .success(_):
                 completion()
             case .failure(let error):
                 print(error)

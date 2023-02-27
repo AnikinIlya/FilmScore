@@ -14,7 +14,7 @@ enum NetworkError: Error {
 }
 
 enum DataType: String {
-    case topFilms = "Top250Movies"
+    case topMovies = "Top250Movies"
     case comingSoonFilms = "ComingSoon"
 }
 
@@ -29,7 +29,7 @@ class NetworkManager {
     private init() {}
     
     //MARK: - Public Methods
-    func fetchData(of type: DataType, completion: @escaping(Result<SeriesCollection<Top250Series>, NetworkError>) -> Void) {
+    func fetch<T: Decodable>(dataType: T.Type, from type: DataType, completion: @escaping(Result<T, NetworkError>) -> Void) {
         guard let url = URL(string: "https://imdb-api.com/API/\(type.rawValue)/\(apiKey)") else { return completion(.failure(.invalidURL))}
         let urlRequest = NSURLRequest(url: url)
         
@@ -40,7 +40,7 @@ class NetworkManager {
                 return
             }
             do {
-                let series = try JSONDecoder().decode(SeriesCollection<Top250Series>.self, from: data)
+                let series = try JSONDecoder().decode(T.self, from: data)
                 DispatchQueue.main.async {
                     completion(.success(series))
                 }
@@ -51,7 +51,7 @@ class NetworkManager {
         }.resume()
     }
     
-    func fetchData(by titleId: String,completion: @escaping(Result<SeriesById, NetworkError>) -> Void) {
+    func fetchData(by titleId: String, completion: @escaping(Result<SeriesById, NetworkError>) -> Void) {
         guard let url = URL(string: "https://imdb-api.com/API/Title/\(apiKey)/\(titleId)") else { return completion(.failure(.invalidURL))}
         let urlRequest = NSURLRequest(url: url)
         

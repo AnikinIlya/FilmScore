@@ -21,7 +21,7 @@ class FilmsListViewModel: FilmsListViewModelProtocol {
     
     //MARK: - Public Methods
     func fetchFilms(of type: DataType, completion: @escaping () -> Void) {
-        NetworkManager.shared.fetchData(of: type) { result in
+        NetworkManager.shared.fetch(dataType: SeriesCollection<Top250Series>.self, from: type) { result in
             switch result {
             case .success(let data):
                 self.seriesList = data.items
@@ -40,19 +40,7 @@ class FilmsListViewModel: FilmsListViewModelProtocol {
         seriesList.count
     }
     
-    func fetchFilm(by titleId: String) {
-        NetworkManager.shared.fetchData(by: titleId) { result in
-            switch result {
-            case .success(let data):
-                self.series = data
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
     func getFilmDetailsViewModel(at indexPath: IndexPath) -> FilmDetailsViewModelProtocol {
-        fetchFilm(by: seriesList[indexPath.row].id)
-        return FilmDetailsViewModel(series: series ?? SeriesById(id: "", title: "", year: "", image: "", runtimeMins: "", plot: "", directors: "", writers: "", stars: "", genres: "", imDbRating: ""))
+        return FilmDetailsViewModel(seriesId: seriesList[indexPath.row].id)
     }
 }

@@ -205,7 +205,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="ayi-pc-zm1">
-                        <barButtonItem key="rightBarButtonItem" title="Item" style="done" id="5E5-gu-B7f"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="5E5-gu-B7f"/>
                     </navigationItem>
                     <connections>
                         <outlet property="directorsLabel" destination="oxp-FI-czk" id="XJx-Fc-0uO"/>

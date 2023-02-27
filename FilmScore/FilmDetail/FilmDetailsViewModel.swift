@@ -20,59 +20,74 @@ protocol FilmDetailsViewModelProtocol {
     var filmWriters: String { get }
     var filmTrailers: String { get }
     
-    init(series: SeriesById)
+    init(seriesId: String)
+    
+    func fetchFilm(completion: @escaping() -> Void) 
 }
 
 class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
     
     
     var filmTitle: String {
-        series.title
+        series?.title ?? ""
     }
     
     var imageData: Data? {
-        ImageManager.shared.fetchImage(from: series.image)
+        ImageManager.shared.fetchImage(from: series?.image)
     }
     
     var filmGenre: String {
-        series.genres
+        series?.genres ?? ""
     }
     
     var filmYear: String {
-        series.year
+        series?.year ?? ""
     }
     
     var filmRuntime: String {
-        series.runtimeMins
+        series?.runtimeMins ?? ""
     }
     
     var filmPlot: String {
-        series.plot
+        series?.plot ?? ""
     }
     
     var filmRating: String {
-        series.imDbRating
+        series?.imDbRating ?? ""
     }
     
     var filmStars: String {
-        series.stars
+        series?.stars ?? ""
     }
     
     var filmDirectors: String {
-        series.directors
+        series?.directors ?? ""
     }
     
     var filmWriters: String {
-        series.writers
+        series?.writers ?? ""
     }
     
     var filmTrailers: String {
-        series.writers
+        series?.writers ?? ""
     }
     
-    private var series: SeriesById
+    private var seriesId: String
+    private var series: SeriesById?
     
-    required init(series: SeriesById) {
-        self.series = series
+    required init(seriesId: String) {
+        self.seriesId = seriesId
+    }
+    
+    func fetchFilm(completion: @escaping() -> Void) {
+        NetworkManager.shared.fetchData(by: seriesId) { result in
+            switch result {
+            case .success(let data):
+                self.series = data
+                completion()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

@@ -12,13 +12,13 @@ class FilmsListViewController: UITableViewController {
     @IBOutlet var searchBar: UISearchBar!
     
     //MARK: - Private Properties
-    private var activityIndicatro: UIActivityIndicatorView?
+    private var activityIndicator: UIActivityIndicatorView?
     private var viewModel: FilmsListViewModelProtocol! {
         didSet {
-            viewModel.fetchFilms(of: .topFilms) { [weak self] in
+            viewModel.fetchFilms(of: .topMovies) { [weak self] in
                 print("Hello")
                 self?.tableView.reloadData()
-                self?.activityIndicatro?.stopAnimating()
+                self?.activityIndicator?.stopAnimating()
             }
         }
     }
@@ -27,6 +27,7 @@ class FilmsListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = FilmsListViewModel()
+        activityIndicator = showActivityIndicator(in: view)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -54,5 +55,17 @@ class FilmsListViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         let filmDetailsViewModel = viewModel.getFilmDetailsViewModel(at: indexPath)
         performSegue(withIdentifier: "showDetails", sender: filmDetailsViewModel)
+    }
+    
+    private func showActivityIndicator(in view: UIView) -> UIActivityIndicatorView {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = .black
+        activityIndicator.startAnimating()
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        
+        view.addSubview(activityIndicator)
+        
+        return activityIndicator
     }
 }

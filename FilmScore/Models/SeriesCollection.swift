@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SeriesById: Codable {
+struct SeriesById: Decodable {
     let id: String
     let title: String
     let year: String
@@ -21,13 +21,13 @@ struct SeriesById: Codable {
     let imDbRating: String
 }
 
-struct SeriesCollection<T: Codable>: Codable {
+struct SeriesCollection<T: Decodable>: Decodable{
     let items: [T]
     let errorMessage: String
 }
 
 //SeriesCollection
-struct Top250Series: Codable {
+struct Top250Series: Decodable {
     let id: String
     let title: String
     let fullTitle: String
@@ -38,7 +38,7 @@ struct Top250Series: Codable {
 }
 
 //SeriesCollection
-struct MostPopularSeries: Codable {
+struct MostPopularSeries: Decodable {
     let id: String
     let rank: String
     let rankUpDown: String
@@ -51,7 +51,7 @@ struct MostPopularSeries: Codable {
 }
 
 //SeriesCollection
-struct InTheaters: Codable {
+struct InTheaters: Decodable {
     let id: String
     let title: String
     let fullTitle: String
@@ -69,7 +69,7 @@ struct InTheaters: Codable {
 }
 
 //SeriesCollection
-struct ComingSoonSeries: Codable {
+struct ComingSoonSeries: Decodable {
     let id: String
     let title: String
     let fullTitle: String
@@ -84,13 +84,12 @@ struct ComingSoonSeries: Codable {
     let stars: String
 }
 
-struct Genre: Codable {
+struct Genre: Decodable {
     let key: String
     let value: String
 }
 
-struct YouTubeTrailer: Codable {
+struct YouTubeTrailer: Decodable {
     let imDbId: String
-    let videoUrl: String
-    let errorMessage: String
+    let linkEmbed: String
 }

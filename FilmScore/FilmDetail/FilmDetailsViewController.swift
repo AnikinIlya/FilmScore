@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class FilmDetailsViewController: UIViewController {
     //MARK: - IBOutlets
@@ -34,6 +35,14 @@ class FilmDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator = showActivityIndicator(in: view)
+    }
+    
+    //MARK: - IBActions
+    @IBAction func whatchTrailerButtonPressed(_ sender: Any) {
+        guard let url = URL(string: viewModel.filmTrailer) else { return }
+        let trailerView = SFSafariViewController(url: url)
+        
+        present(trailerView, animated: true)
     }
     
     //MARK: - PrivateMethods

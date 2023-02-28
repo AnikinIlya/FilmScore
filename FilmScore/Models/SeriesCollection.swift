@@ -83,12 +83,12 @@ struct ComingSoonSeries: Decodable {
     let stars: String
 }
 
+//InTheaters, SeriesCollection
 struct Genre: Decodable {
     let key: String
     let value: String
 }
 
 struct Trailer: Decodable {
-    let imDbId: String
-    let linkEmbed: String
+    let videoUrl: String
 }

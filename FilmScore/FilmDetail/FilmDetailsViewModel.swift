@@ -16,6 +16,7 @@ protocol FilmDetailsViewModelProtocol {
     var filmRating: String { get }
     var filmStars: String { get }
     var filmDirectors: String { get }
+    var filmTrailer: String { get }
     
     init(seriesId: String)
     
@@ -57,19 +58,24 @@ class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
         series?.directors.replacingOccurrences(of: ", ", with: "\n") ?? ""
     }
     
+    var filmTrailer: String {
+        trailer?.videoUrl ?? ""
+    }
+    
     private var seriesId: String
     private var series: SeriesById?
+    private var trailer: Trailer?
     
     required init(seriesId: String) {
         self.seriesId = seriesId
     }
     
     func fetchFilm(completion: @escaping() -> Void) {
-        
-        NetworkManager.shared.fetch(dataType: SeriesById.self, from: .title, titleId: seriesId) { result in
+        NetworkManager.shared.fetch(dataType: SeriesById.self, from: .title, titleId: seriesId) { [weak self] result in
             switch result {
             case .success(let data):
-                self.series = data
+                self?.series = data
+                self?.fetchTrailer()
                 completion()
             case .failure(let error):
                 print(error)
@@ -78,11 +84,11 @@ class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
     }
     
     
-    func fetchTrailer(completion: @escaping() -> Void) {
-        NetworkManager.shared.fetch(dataType: Trailer.self, from: .trailer, titleId: seriesId) { result in
+    func fetchTrailer(){
+        NetworkManager.shared.fetch(dataType: Trailer.self, from: .trailer, titleId: seriesId) {[weak self] result in
             switch result {
-            case .success(_):
-                completion()
+            case .success(let data):
+                self?.trailer = data
             case .failure(let error):
                 print(error)
             }

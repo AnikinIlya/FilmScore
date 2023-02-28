@@ -167,6 +167,16 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53U-oC-v6e">
+                                <rect key="frame" x="143" y="539.5" width="128.5" height="34.5"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Watch trailer">
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="17"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="whatchTrailerButtonPressed:" destination="TCB-5l-R5q" eventType="touchUpInside" id="QGG-KX-0vJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cJA-cF-W53"/>
                         <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
@@ -180,6 +190,8 @@
                             <constraint firstItem="WPR-K9-Imf" firstAttribute="leading" secondItem="cJA-cF-W53" secondAttribute="leading" constant="12" id="nYR-FL-6ln"/>
                             <constraint firstItem="bLT-cB-DOq" firstAttribute="leading" secondItem="cJA-cF-W53" secondAttribute="leading" constant="12" id="nsz-GS-42w"/>
                             <constraint firstItem="cJA-cF-W53" firstAttribute="trailing" secondItem="WPR-K9-Imf" secondAttribute="trailing" constant="12" id="sV5-p3-ZVk"/>
+                            <constraint firstItem="53U-oC-v6e" firstAttribute="top" secondItem="bLT-cB-DOq" secondAttribute="bottom" constant="12" id="vNe-Tu-I6A"/>
+                            <constraint firstItem="53U-oC-v6e" firstAttribute="centerX" secondItem="KIH-JJ-aWu" secondAttribute="centerX" id="vO4-Jx-xYm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="ayi-pc-zm1">

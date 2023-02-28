@@ -16,7 +16,6 @@ class FilmsListViewController: UITableViewController {
     private var viewModel: FilmsListViewModelProtocol! {
         didSet {
             viewModel.fetchFilms(of: .topMovies) { [weak self] in
-                print("Hello")
                 self?.tableView.reloadData()
                 self?.activityIndicator?.stopAnimating()
             }

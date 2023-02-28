@@ -15,7 +15,7 @@ enum NetworkError: Error {
 
 enum DataType: String {
     case title = "Title"
-    case trailer = "Trailer"
+    case trailer = "YouTubeTrailer"
     case topMovies = "Top250Movies"
     case comingSoonFilms = "ComingSoon"
     case mostPopularSeries = "MostPopularSeries"

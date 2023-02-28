@@ -21,10 +21,10 @@ class FilmsListViewModel: FilmsListViewModelProtocol {
     
     //MARK: - Public Methods
     func fetchFilms(of type: DataType, completion: @escaping () -> Void) {
-        NetworkManager.shared.fetch(dataType: SeriesCollection<Top250Series>.self, from: type) { result in
+        NetworkManager.shared.fetch(dataType: SeriesCollection<Top250Series>.self, from: type) {[weak self] result in
             switch result {
             case .success(let data):
-                self.seriesList = data.items
+                self?.seriesList = data.items
                 completion()
             case .failure(let error):
                 print(error)

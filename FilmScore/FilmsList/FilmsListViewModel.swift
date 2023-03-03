@@ -8,7 +8,7 @@
 import Foundation
 
 protocol FilmsListViewModelProtocol {
-    func fetchFilms(of type: DataType, completion: @escaping() -> Void)
+    func fetchFilms(of requestExpression: RequestExpression, searchWords: String, completion: @escaping() -> Void)
     func numberOfRows() -> Int
     func getFilmCellViewModel(at indexPath: IndexPath) -> FilmCellViewModelProtocol
     func getFilmDetailsViewModel(at indexPath: IndexPath) -> FilmDetailsViewModelProtocol
@@ -16,12 +16,12 @@ protocol FilmsListViewModelProtocol {
 
 class FilmsListViewModel: FilmsListViewModelProtocol {
     //MARK: - Private Properties
-    private var seriesList: [Top250Series] = []
-    private var series: SeriesById?
+    private var seriesList: [Top250Movies] = []
+    private var series: Title?
     
     //MARK: - Public Methods
-    func fetchFilms(of type: DataType, completion: @escaping () -> Void) {
-        NetworkManager.shared.fetch(dataType: SeriesCollection<Top250Series>.self, from: type) {[weak self] result in
+    func fetchFilms(of requestExpression: RequestExpression, searchWords: String = "", completion: @escaping () -> Void) {
+        NetworkManager.shared.fetch(type: SeriesCollection<Top250Movies>.self, from: requestExpression, searchWords: searchWords) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.seriesList = data.items

@@ -44,7 +44,10 @@ class FilmDetailsViewController: UIViewController {
         
         present(trailerView, animated: true)
     }
-    
+}
+
+//MARK: - Extensions
+extension FilmDetailsViewController {
     //MARK: - PrivateMethods
     private func setupUI() {
         self.title = viewModel.filmTitle
@@ -55,17 +58,30 @@ class FilmDetailsViewController: UIViewController {
         ratingLabel.text = viewModel.filmRating
         starsLabel.text = viewModel.filmStars
         directorsLabel.text = viewModel.filmDirectors
+        
+        hideUI(false)
     }
     
     private func showActivityIndicator(in view: UIView) -> UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.color = .black
+        activityIndicator.color = .systemYellow
         activityIndicator.startAnimating()
         activityIndicator.center = view.center
         activityIndicator.hidesWhenStopped = true
         
         view.addSubview(activityIndicator)
+        hideUI(true)
         
         return activityIndicator
+    }
+    
+    private func hideUI(_ show:Bool) {
+        imageView.isHidden = show
+        genreLabel.isHidden = show
+        yearAndRuntimeLabel.isHidden = show
+        plotLabel.isHidden = show
+        ratingLabel.isHidden = show
+        starsLabel.isHidden = show
+        directorsLabel.isHidden = show
     }
 }

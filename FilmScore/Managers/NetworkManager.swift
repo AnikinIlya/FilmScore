@@ -13,15 +13,6 @@ enum NetworkError: Error {
     case decodingError
 }
 
-enum DataType: String {
-    case title = "Title"
-    case trailer = "YouTubeTrailer"
-    case topMovies = "Top250Movies"
-    case comingSoonFilms = "ComingSoon"
-    case mostPopularSeries = "MostPopularSeries"
-    case inTheaters = "InTheaters"
-}
-
 class NetworkManager {
     //MARK: - Private Properties
     private let apiKey = API().apiKey
@@ -33,14 +24,16 @@ class NetworkManager {
     private init() {}
     
     //MARK: - Public Methods
-    func fetch<T: Decodable>(dataType: T.Type, from type: DataType, titleId: String = "", completion: @escaping(Result<T, NetworkError>) -> Void) {
+    func fetch<T: Decodable>(type: T.Type, from requestExpression: RequestExpression, titleId: String = "", searchWords: String = "", completion: @escaping(Result<T, NetworkError>) -> Void) {
         var url = URL(string: "")
         
-        switch type {
+        switch requestExpression {
+        case .search:
+            url = URL(string: "https://imdb-api.com/API/\(requestExpression.rawValue)/\(apiKey)/\(searchWords)")
         case .title, .trailer:
-            url = URL(string: "https://imdb-api.com/API/\(type.rawValue)/\(apiKey)/\(titleId)")
-        case .topMovies, .comingSoonFilms, .mostPopularSeries, .inTheaters:
-            url = URL(string: "https://imdb-api.com/API/\(type.rawValue)/\(apiKey)")
+            url = URL(string: "https://imdb-api.com/API/\(requestExpression.rawValue)/\(apiKey)/\(titleId)")
+        case .topMovies, .comingSoonFilms, .mostPopularMovies, .inTheaters:
+            url = URL(string: "https://imdb-api.com/API/\(requestExpression.rawValue)/\(apiKey)")
         }
         
         guard let url = url else {
@@ -56,7 +49,7 @@ class NetworkManager {
                 return
             }
             do {
-                let series = try JSONDecoder().decode(T.self, from: data)
+                let series = try JSONDecoder().decode(type.self, from: data)
                 DispatchQueue.main.async {
                     completion(.success(series))
                 }

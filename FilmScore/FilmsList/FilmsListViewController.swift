@@ -8,14 +8,12 @@
 import UIKit
 
 class FilmsListViewController: UITableViewController {
-    //MARK: - IBOutlets
-    @IBOutlet var searchBar: UISearchBar!
-    
     //MARK: - Private Properties
+    private let searchController = UISearchController(searchResultsController: nil)
     private var activityIndicator: UIActivityIndicatorView?
     private var viewModel: FilmsListViewModelProtocol! {
         didSet {
-            viewModel.fetchFilms(of: .topMovies) { [weak self] in
+            viewModel.fetchFilms(of: .topMovies, searchWords: "") { [weak self] in
                 self?.tableView.reloadData()
                 self?.activityIndicator?.stopAnimating()
             }
@@ -27,6 +25,7 @@ class FilmsListViewController: UITableViewController {
         super.viewDidLoad()
         viewModel = FilmsListViewModel()
         activityIndicator = showActivityIndicator(in: view)
+        setupSearchController()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -58,7 +57,7 @@ class FilmsListViewController: UITableViewController {
     
     private func showActivityIndicator(in view: UIView) -> UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.color = .black
+        activityIndicator.color = .systemYellow
         activityIndicator.startAnimating()
         activityIndicator.center = view.center
         activityIndicator.hidesWhenStopped = true
@@ -66,5 +65,28 @@ class FilmsListViewController: UITableViewController {
         view.addSubview(activityIndicator)
         
         return activityIndicator
+    }
+    
+    private func setupSearchController(){
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        searchController.searchBar.barTintColor = .systemYellow
+        searchController.searchBar.tintColor = .black
+    }
+    
+    
+}
+
+extension FilmsListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        
+        
+    }
+    
+    private func getSearchResult() {
+        
     }
 }

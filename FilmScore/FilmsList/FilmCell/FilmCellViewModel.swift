@@ -13,12 +13,12 @@ protocol FilmCellViewModelProtocol {
     var crew: String { get }
     var rating: String { get }
     
-    init (film: Top250Series)
+    init (film: Top250Movies)
 }
 
 class FilmCellViewModel: FilmCellViewModelProtocol {
     //MARK: - Privae Properties
-    private let film: Top250Series
+    private let film: Top250Movies
     
     //MARK: - Public Properties
     var imageData: Data? {
@@ -38,7 +38,7 @@ class FilmCellViewModel: FilmCellViewModelProtocol {
     }
     
     //MARK: - Initializers
-    required init(film: Top250Series) {
+    required init(film: Top250Movies) {
         self.film = film
     }
 }

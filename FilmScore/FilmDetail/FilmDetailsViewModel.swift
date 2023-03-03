@@ -63,15 +63,15 @@ class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
     }
     
     private var seriesId: String
-    private var series: SeriesById?
-    private var trailer: Trailer?
+    private var series: Title?
+    private var trailer: YouTubeTrailer?
     
     required init(seriesId: String) {
         self.seriesId = seriesId
     }
     
     func fetchFilm(completion: @escaping() -> Void) {
-        NetworkManager.shared.fetch(dataType: SeriesById.self, from: .title, titleId: seriesId) { [weak self] result in
+        NetworkManager.shared.fetch(type: Title.self, from: .title, titleId: seriesId) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.series = data
@@ -85,7 +85,7 @@ class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
     
     
     func fetchTrailer(){
-        NetworkManager.shared.fetch(dataType: Trailer.self, from: .trailer, titleId: seriesId) {[weak self] result in
+        NetworkManager.shared.fetch(type: YouTubeTrailer.self, from: .trailer, titleId: seriesId) {[weak self] result in
             switch result {
             case .success(let data):
                 self?.trailer = data

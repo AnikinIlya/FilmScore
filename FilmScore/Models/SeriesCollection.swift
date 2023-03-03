@@ -7,7 +7,17 @@
 
 import Foundation
 
-struct SeriesById: Decodable {
+enum RequestExpression: String, Decodable {
+    case search = "SearchMovie"
+    case title = "Title"
+    case trailer = "YouTubeTrailer"
+    case topMovies = "Top250Movies"
+    case comingSoonFilms = "ComingSoon"
+    case mostPopularMovies = "MostPopularMovies"
+    case inTheaters = "InTheaters"
+}
+
+struct Title: Decodable {
     let id: String
     let title: String
     let year: String
@@ -20,13 +30,25 @@ struct SeriesById: Decodable {
     let imDbRating: String
 }
 
+struct SearchMovie: Decodable {
+    let expression: String
+    let results: MovieSearchResponse
+}
+
+struct MovieSearchResponse: Decodable {
+    let id: String
+    let image: String
+    let title: String
+    let description: String
+}
+
 struct SeriesCollection<T: Decodable>: Decodable{
     let items: [T]
     let errorMessage: String
 }
 
 //SeriesCollection
-struct Top250Series: Decodable {
+struct Top250Movies: Decodable {
     let id: String
     let title: String
     let fullTitle: String
@@ -37,7 +59,7 @@ struct Top250Series: Decodable {
 }
 
 //SeriesCollection
-struct MostPopularSeries: Decodable {
+struct MostPopularMovies: Decodable {
     let id: String
     let rank: String
     let rankUpDown: String
@@ -68,7 +90,7 @@ struct InTheaters: Decodable {
 }
 
 //SeriesCollection
-struct ComingSoonSeries: Decodable {
+struct ComingSoon: Decodable {
     let id: String
     let title: String
     let fullTitle: String
@@ -89,6 +111,6 @@ struct Genre: Decodable {
     let value: String
 }
 
-struct Trailer: Decodable {
+struct YouTubeTrailer: Decodable {
     let videoUrl: String
 }

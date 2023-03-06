@@ -47,7 +47,7 @@ class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
     }
     
     var filmRating: String {
-        "IMDB rating - \(series?.imDbRating ?? "")/10 ⭐️"
+        "IMDB rating - \(series?.imDbRating ?? "Not rated") ⭐️"
     }
     
     var filmStars: String {
@@ -71,7 +71,7 @@ class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
     }
     
     func fetchFilm(completion: @escaping() -> Void) {
-        NetworkManager.shared.fetch(type: Title.self, from: .title, titleId: seriesId) { [weak self] result in
+        NetworkManager.shared.fetch(type: Title.self, endpoint: .title, titleId: seriesId) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.series = data
@@ -85,7 +85,7 @@ class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
     
     
     func fetchTrailer(){
-        NetworkManager.shared.fetch(type: YouTubeTrailer.self, from: .trailer, titleId: seriesId) {[weak self] result in
+        NetworkManager.shared.fetch(type: YouTubeTrailer.self, endpoint: .trailer, titleId: seriesId) {[weak self] result in
             switch result {
             case .success(let data):
                 self?.trailer = data

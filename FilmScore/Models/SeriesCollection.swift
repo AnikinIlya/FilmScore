@@ -7,16 +7,8 @@
 
 import Foundation
 
-enum RequestExpression: String, Decodable {
-    case search = "SearchMovie"
-    case title = "Title"
-    case trailer = "YouTubeTrailer"
-    case topMovies = "Top250Movies"
-    case comingSoonFilms = "ComingSoon"
-    case mostPopularMovies = "MostPopularMovies"
-    case inTheaters = "InTheaters"
-}
-
+//MARK: - Title
+//Model for FilmDetailsView, for detailed information about a movie
 struct Title: Decodable {
     let id: String
     let title: String
@@ -27,12 +19,20 @@ struct Title: Decodable {
     let directors: String
     let stars: String
     let genres: String
-    let imDbRating: String
+    let imDbRating: String?
 }
 
+//MARK: - YouTubeTrailer
+//Model for FilmDetailsView, for YouTube trailer
+struct YouTubeTrailer: Decodable {
+    let videoUrl: String
+}
+
+//MARK: - SearchMovie
+//Model for FilmList, for search bar results
 struct SearchMovie: Decodable {
     let expression: String
-    let results: MovieSearchResponse
+    let results: [MovieSearchResponse]
 }
 
 struct MovieSearchResponse: Decodable {
@@ -42,75 +42,18 @@ struct MovieSearchResponse: Decodable {
     let description: String
 }
 
-struct SeriesCollection<T: Decodable>: Decodable{
-    let items: [T]
+//MARK: - SeriesCollection
+//Model for FilmList, for most popular right now, top, coming soon and in theaters results
+struct SeriesCollection: Decodable{
+    let items: [Series]
     let errorMessage: String
 }
 
-//SeriesCollection
-struct Top250Movies: Decodable {
+struct Series: Decodable {
     let id: String
-    let title: String
     let fullTitle: String
-    let year: String
     let image: String
-    let crew: String
-    let imDbRating: String
-}
-
-//SeriesCollection
-struct MostPopularMovies: Decodable {
-    let id: String
-    let rank: String
-    let rankUpDown: String
-    let title: String
-    let fullTitle: String
-    let year: String
-    let image: String
-    let crew: String
-    let imDbRating: String
-}
-
-//SeriesCollection
-struct InTheaters: Decodable {
-    let id: String
-    let title: String
-    let fullTitle: String
-    let year: String
-    let releaseState: String
-    let image: String
-    let runtimeStr: String
-    let plot: String
-    let contentRating: String
-    let imDbRating: String
-    let genres: String
-    let genreList: [Genre]
-    let directors: String
-    let stars: String
-}
-
-//SeriesCollection
-struct ComingSoon: Decodable {
-    let id: String
-    let title: String
-    let fullTitle: String
-    let year: String
-    let releaseState: String
-    let image: String
+    let crew: String?
     let plot: String?
-    let contentRating: String
-    let genres: String
-    let genreList: [Genre]
-    let directors: String
-    let stars: String
-}
-
-//InTheaters, SeriesCollection
-struct Genre: Decodable {
-    let key: String
-    let value: String
-}
-
-struct YouTubeTrailer: Decodable {
-    let videoUrl: String
+    let imDbRating: String?
 }

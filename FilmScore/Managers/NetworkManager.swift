@@ -7,33 +7,46 @@
 
 import Foundation
 
+//MARK: - NetworkErrors
 enum NetworkError: Error {
     case invalidURL
     case noData
     case decodingError
 }
 
+//MARK: - Endpoints
+enum Endpoints: String, Decodable {
+    case search = "SearchMovie"
+    case title = "Title"
+    case trailer = "YouTubeTrailer"
+    case topMovies = "Top250Movies"
+    case comingSoonFilms = "ComingSoon"
+    case mostPopularMovies = "MostPopularMovies"
+    case inTheaters = "InTheaters"
+}
+
+//MARK: - Network Manager
 class NetworkManager {
-    //MARK: - Private Properties
-    private let apiKey = API().apiKey
-    
     //MARK: - Public Properties
     static let shared = NetworkManager()
+    
+    //MARK: - Private Properties
+    private let apiKey = API().apiKey
     
     //MARK: - Initializers
     private init() {}
     
     //MARK: - Public Methods
-    func fetch<T: Decodable>(type: T.Type, from requestExpression: RequestExpression, titleId: String = "", searchWords: String = "", completion: @escaping(Result<T, NetworkError>) -> Void) {
+    func fetch<T: Decodable>(type: T.Type, endpoint: Endpoints, titleId: String = "", searchWords: String = "", completion: @escaping(Result<T, NetworkError>) -> Void) {
         var url = URL(string: "")
         
-        switch requestExpression {
+        switch endpoint {
         case .search:
-            url = URL(string: "https://imdb-api.com/API/\(requestExpression.rawValue)/\(apiKey)/\(searchWords)")
+            url = URL(string: "https://imdb-api.com/API/\(endpoint.rawValue)/\(apiKey)/\(searchWords)")
         case .title, .trailer:
-            url = URL(string: "https://imdb-api.com/API/\(requestExpression.rawValue)/\(apiKey)/\(titleId)")
+            url = URL(string: "https://imdb-api.com/API/\(endpoint.rawValue)/\(apiKey)/\(titleId)")
         case .topMovies, .comingSoonFilms, .mostPopularMovies, .inTheaters:
-            url = URL(string: "https://imdb-api.com/API/\(requestExpression.rawValue)/\(apiKey)")
+            url = URL(string: "https://imdb-api.com/API/\(endpoint.rawValue)/\(apiKey)")
         }
         
         guard let url = url else {

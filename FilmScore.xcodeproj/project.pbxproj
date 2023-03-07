@@ -23,6 +23,7 @@
 		096DD69B29A7B75B00E4F8DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 096DD69A29A7B75B00E4F8DB /* LaunchScreen.storyboard */; };
 		096DD69F29AA75E600E4F8DB /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DD69E29AA75E600E4F8DB /* API.swift */; };
 		097FC47A299932870076CEF0 /* FilmsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FC479299932870076CEF0 /* FilmsListViewModel.swift */; };
+		09C0A79829B7CA87000C3A68 /* Casino3D.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C0A79729B7CA86000C3A68 /* Casino3D.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		096DD69A29A7B75B00E4F8DB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		096DD69E29AA75E600E4F8DB /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		097FC479299932870076CEF0 /* FilmsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsListViewModel.swift; sourceTree = "<group>"; };
+		09C0A79729B7CA86000C3A68 /* Casino3D.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Casino3D.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		091A71EC29B7BAD300EF3244 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				09C0A79729B7CA86000C3A68 /* Casino3D.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		0959FB7029965ACB00F3A20B = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				0959FB8529965AD300F3A20B /* Assets.xcassets */,
+				091A71EC29B7BAD300EF3244 /* Fonts */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -222,6 +233,7 @@
 				096DD68B29A503D800E4F8DB /* FilmCell.xib in Resources */,
 				0959FB8629965AD300F3A20B /* Assets.xcassets in Resources */,
 				096DD69B29A7B75B00E4F8DB /* LaunchScreen.storyboard in Resources */,
+				09C0A79829B7CA87000C3A68 /* Casino3D.ttf in Resources */,
 				096DD68929A503B500E4F8DB /* FilmsList.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

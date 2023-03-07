@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,28 +15,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tv.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="I43-A5-VPp">
-                                <rect key="frame" x="82" y="200" width="250.5" height="199.5"/>
-                                <color key="tintColor" systemColor="systemYellowColor"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FilmScoreLaunch" translatesAutoresizingMaskIntoConstraints="NO" id="AaZ-Aj-JUb">
+                                <rect key="frame" x="103.5" y="263.5" width="207" height="147"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="I43-A5-VPp" secondAttribute="height" multiplier="5:4" id="xRV-ZN-mHv"/>
+                                    <constraint firstAttribute="width" secondItem="AaZ-Aj-JUb" secondAttribute="height" multiplier="960:683" id="c7h-p7-D2X"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FilmScore" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="GJd-Yh-RWb">
-                                <rect key="frame" x="123.5" y="278" width="167" height="43"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="I43-A5-VPp" firstAttribute="width" secondItem="GJd-Yh-RWb" secondAttribute="width" multiplier="1.5" id="EPa-gt-1ac"/>
-                            <constraint firstItem="I43-A5-VPp" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="bottom" multiplier="1/3" constant="1" id="OGl-gf-eHN"/>
-                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="centerX" secondItem="GJd-Yh-RWb" secondAttribute="centerX" id="Q3B-4B-g5h"/>
-                            <constraint firstItem="I43-A5-VPp" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="eiC-pr-HQG"/>
-                            <constraint firstItem="GJd-Yh-RWb" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="bottom" multiplier="1/3" constant="1" id="moa-c2-u7t"/>
+                            <constraint firstItem="AaZ-Aj-JUb" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.5" id="WpW-97-I2h"/>
+                            <constraint firstItem="AaZ-Aj-JUb" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="l2n-JL-Drv"/>
+                            <constraint firstItem="AaZ-Aj-JUb" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="3/4" constant="1" id="zFQ-Bn-LVV"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -47,9 +37,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="tv.fill" catalog="system" width="32" height="32"/>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <image name="FilmScoreLaunch" width="960" height="683"/>
     </resources>
 </document>

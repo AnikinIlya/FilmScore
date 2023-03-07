@@ -12,6 +12,7 @@ protocol FilmsListViewModelProtocol {
     func numberOfRows() -> Int
     func getFilmCellViewModel(at indexPath: IndexPath) -> FilmCellViewModelProtocol
     func getFilmDetailsViewModel(at indexPath: IndexPath) -> FilmDetailsViewModelProtocol
+    func clearResults()
 }
 
 class FilmsListViewModel: FilmsListViewModelProtocol {
@@ -30,6 +31,10 @@ class FilmsListViewModel: FilmsListViewModelProtocol {
                 print(error)
             }
         }
+    }
+    
+    func clearResults() {
+        seriesList = []
     }
     
     func getFilmCellViewModel(at indexPath: IndexPath) -> FilmCellViewModelProtocol {

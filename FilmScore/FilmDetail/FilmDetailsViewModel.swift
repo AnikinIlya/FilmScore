@@ -7,6 +7,7 @@
 
 import Foundation
 
+//MARK: - FilmDetailsViewModelProtocol
 protocol FilmDetailsViewModelProtocol {
     var filmTitle: String { get }
     var imageData: Data? { get }
@@ -23,9 +24,10 @@ protocol FilmDetailsViewModelProtocol {
     func fetchFilm(completion: @escaping() -> Void) 
 }
 
+//MARK: - FilmDetailsViewModel
 class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
     
-    
+    //MARK: - Public Properties
     var filmTitle: String {
         series?.title ?? ""
     }
@@ -62,14 +64,17 @@ class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
         trailer?.videoUrl ?? ""
     }
     
+    //MARK: - Private Properties
     private var seriesId: String
     private var series: Title?
     private var trailer: YouTubeTrailer?
     
+    //MARK: - Initializers
     required init(seriesId: String) {
         self.seriesId = seriesId
     }
     
+    //MARK: - Public Methods
     func fetchFilm(completion: @escaping() -> Void) {
         NetworkManager.shared.fetch(type: Title.self, endpoint: .title, titleId: seriesId) { [weak self] result in
             switch result {

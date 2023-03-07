@@ -15,8 +15,13 @@ class FilmsListViewController: UITableViewController {
     
     private var endpoint: Endpoints = .topMovies {
         didSet {
-            viewModel.fetchFilms(from: endpoint, searchWords: "") {[weak self] in
+            self.activityIndicator?.startAnimating()
+            viewModel.clearResults()
+            self.tableView.reloadData()
+            
+            viewModel.fetchFilms(from: endpoint, searchWords: "") { [weak self] in
                 self?.tableView.reloadData()
+                self?.activityIndicator?.stopAnimating()
             }
         }
     }
@@ -71,7 +76,7 @@ class FilmsListViewController: UITableViewController {
 //MARK: - UISearchResultsUpdating
 extension FilmsListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else { return }
+        guard let _ = searchController.searchBar.text else { return }
         
     }
     
@@ -131,7 +136,11 @@ private extension FilmsListViewController {
             self.title = "In Theaters"
         }
         
-        topMenu = UIMenu(title: "Options", children: [top250Movies, comingSoon, mostPopular, inTheaters])
+        let favoriteMovies = UIAction(title: "Favorite Movies", image: UIImage(systemName: "heart.fill")) { [unowned self] _ in
+            self.title = "Favorite Movies"
+        }
+        
+        topMenu = UIMenu(title: "Options", children: [top250Movies, comingSoon, mostPopular, inTheaters, favoriteMovies])
         
         let barItemRight = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), menu: topMenu)
         navigationItem.rightBarButtonItem = barItemRight

@@ -220,15 +220,20 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="ayi-pc-zm1">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="heart" catalog="system" id="5E5-gu-B7f">
                             <color key="tintColor" red="1" green="0.49019607840000001" blue="0.039215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="addToFavoriteButtonPressed:" destination="TCB-5l-R5q" id="Tkj-lO-w2o"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addToFavoriteButton" destination="5E5-gu-B7f" id="hNf-rB-WNH"/>
                         <outlet property="directorsLabel" destination="oxp-FI-czk" id="XJx-Fc-0uO"/>
                         <outlet property="genreLabel" destination="eLA-KK-WOz" id="Kfj-pz-R5H"/>
                         <outlet property="imageView" destination="jwa-5E-Uca" id="PrA-XW-Buo"/>
                         <outlet property="plotLabel" destination="eRe-hs-AAI" id="Fn6-56-Llo"/>
                         <outlet property="ratingLabel" destination="oqv-XV-qND" id="s68-bl-qVy"/>
                         <outlet property="starsLabel" destination="fEw-df-Qps" id="8iA-bc-gDB"/>
+                        <outlet property="watchTrailerButton" destination="53U-oC-v6e" id="yNN-oS-nK6"/>
                         <outlet property="yearAndRuntimeLabel" destination="XLE-ep-jvg" id="vwz-FF-LJt"/>
                     </connections>
                 </viewController>

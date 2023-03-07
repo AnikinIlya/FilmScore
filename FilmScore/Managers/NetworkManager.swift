@@ -27,6 +27,7 @@ enum Endpoints: String, Decodable {
 
 //MARK: - Network Manager
 class NetworkManager {
+    
     //MARK: - Public Properties
     static let shared = NetworkManager()
     

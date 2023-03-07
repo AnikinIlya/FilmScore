@@ -8,7 +8,9 @@
 import UIKit
 import SafariServices
 
+//MARK: - FilmDetailsViewController
 class FilmDetailsViewController: UIViewController {
+    
     //MARK: - IBOutlets
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var genreLabel: UILabel!
@@ -17,6 +19,8 @@ class FilmDetailsViewController: UIViewController {
     @IBOutlet var ratingLabel: UILabel!
     @IBOutlet var starsLabel: UILabel!
     @IBOutlet var directorsLabel: UILabel!
+    @IBOutlet var watchTrailerButton: UIButton!
+    @IBOutlet var addToFavoriteButton: UIBarButtonItem!
     
     //MARK: - Public Properties
     var viewModel: FilmDetailsViewModelProtocol! {
@@ -38,18 +42,23 @@ class FilmDetailsViewController: UIViewController {
     }
     
     //MARK: - IBActions
-    @IBAction func whatchTrailerButtonPressed(_ sender: Any) {
+    @IBAction func whatchTrailerButtonPressed(_ sender: UIButton) {
         guard let url = URL(string: viewModel.filmTrailer) else { return }
         let trailerView = SFSafariViewController(url: url)
         
         present(trailerView, animated: true)
     }
+    
+    @IBAction func addToFavoriteButtonPressed(_ sender: UIButton) {
+        addToFavoriteButton.image = UIImage(systemName: "heart.fill")
+        addToFavoriteButton.tintColor = .systemRed
+    }
+    
 }
 
 //MARK: - Extensions
-extension FilmDetailsViewController {
-    //MARK: - PrivateMethods
-    private func setupUI() {
+private extension FilmDetailsViewController {
+    func setupUI() {
         self.title = viewModel.filmTitle
         imageView.image = UIImage(data: viewModel.imageData ?? Data())
         genreLabel.text = viewModel.filmGenre
@@ -62,7 +71,7 @@ extension FilmDetailsViewController {
         hideUI(false)
     }
     
-    private func showActivityIndicator(in view: UIView) -> UIActivityIndicatorView {
+    func showActivityIndicator(in view: UIView) -> UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.color = .systemYellow
         activityIndicator.startAnimating()
@@ -75,13 +84,15 @@ extension FilmDetailsViewController {
         return activityIndicator
     }
     
-    private func hideUI(_ show:Bool) {
-        imageView.isHidden = show
-        genreLabel.isHidden = show
-        yearAndRuntimeLabel.isHidden = show
-        plotLabel.isHidden = show
-        ratingLabel.isHidden = show
-        starsLabel.isHidden = show
-        directorsLabel.isHidden = show
+    func hideUI(_ statement:Bool) {
+        imageView.isHidden = statement
+        genreLabel.isHidden = statement
+        yearAndRuntimeLabel.isHidden = statement
+        plotLabel.isHidden = statement
+        ratingLabel.isHidden = statement
+        starsLabel.isHidden = statement
+        directorsLabel.isHidden = statement
+        watchTrailerButton.isHidden = statement
+        addToFavoriteButton.customView?.isHidden = statement
     }
 }

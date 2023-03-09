@@ -1,7 +1,7 @@
 # Pet-проект "FilmScore"
 Приложение с поиском фильмов на основе [IMDb-API](https://imdb-api.com)
 
-<img src="https://user-images.githubusercontent.com/98335973/224018446-a2029eb7-b619-45b9-b012-0e8012b03d94.gif" width ="230" height="500" />
+<img src="https://user-images.githubusercontent.com/98335973/224054564-ef5b2875-51cd-438c-b031-13b2449e0f8b.gif" width ="230" height="500" loop=infinite/>
 
 ## Stack:
 - Swift

@@ -13,6 +13,9 @@ class FilmsListViewController: UITableViewController {
     //MARK: - Private Properties
     private let searchController = UISearchController(searchResultsController: nil)
     
+    private var topMenu = UIMenu()
+    private var activityIndicator: UIActivityIndicatorView?
+    
     private var endpoint: Endpoints = .topMovies {
         didSet {
             self.activityIndicator?.startAnimating()
@@ -20,18 +23,24 @@ class FilmsListViewController: UITableViewController {
             self.tableView.reloadData()
             
             viewModel.fetchFilms(from: endpoint, searchWords: "") { [weak self] in
-                self?.tableView.reloadData()
+                if self?.viewModel.errorMessage == "" {
+                    self?.tableView.reloadData()
+                } else {
+                    self?.setupAlertController(viewModelError: self?.viewModel)
+                }
                 self?.activityIndicator?.stopAnimating()
             }
         }
     }
     
-    private var topMenu = UIMenu()
-    private var activityIndicator: UIActivityIndicatorView?
     private var viewModel: FilmsListViewModelProtocol! {
         didSet {
             viewModel.fetchFilms(from: endpoint, searchWords: "") { [weak self] in
-                self?.tableView.reloadData()
+                if self?.viewModel.errorMessage == "" {
+                    self?.tableView.reloadData()
+                } else {
+                    self?.setupAlertController(viewModelError: self?.viewModel)
+                }
                 self?.activityIndicator?.stopAnimating()
             }
         }
@@ -145,5 +154,17 @@ private extension FilmsListViewController {
         let barItemRight = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), menu: topMenu)
         navigationItem.rightBarButtonItem = barItemRight
         navigationItem.rightBarButtonItem?.tintColor = .black
+    }
+    
+    func setupAlertController(viewModelError: FilmsListViewModelProtocol?) {
+        let alertController = UIAlertController(title: "Service Error", message: viewModelError?.errorMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        
+        alertController.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor(named: "AccentColor")
+        alertController.view.tintColor = UIColor(named: "TintColor")
+        
+        present(alertController, animated: true)
     }
 }

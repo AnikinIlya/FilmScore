@@ -20,12 +20,14 @@ struct Title: Decodable {
     let stars: String
     let genres: String
     let imDbRating: String?
+    let errorMessage: String
 }
 
 //MARK: - YouTubeTrailer
 //Model for FilmDetailsView, for YouTube trailer
 struct YouTubeTrailer: Decodable {
     let videoUrl: String
+    let errorMessage: String
 }
 
 //MARK: - SearchMovie
@@ -33,6 +35,7 @@ struct YouTubeTrailer: Decodable {
 struct SearchMovie: Decodable {
     let expression: String
     let results: [MovieSearchResponse]
+    let errorMessage: String
 }
 
 struct MovieSearchResponse: Decodable {

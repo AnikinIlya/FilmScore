@@ -26,7 +26,11 @@ class FilmDetailsViewController: UIViewController {
     var viewModel: FilmDetailsViewModelProtocol! {
         didSet{
             viewModel.fetchFilm { [weak self] in
-                self?.setupUI()
+                if self?.viewModel.errorMessage == "" {
+                    self?.setupUI()
+                } else {
+                    self?.setupAlertController(viewModelError: self?.viewModel)
+                }
                 self?.activityIndicator?.stopAnimating()
             }
         }
@@ -53,7 +57,6 @@ class FilmDetailsViewController: UIViewController {
         addToFavoriteButton.image = UIImage(systemName: "heart.fill")
         addToFavoriteButton.tintColor = .systemRed
     }
-    
 }
 
 //MARK: - Extensions
@@ -94,5 +97,17 @@ private extension FilmDetailsViewController {
         directorsLabel.isHidden = statement
         watchTrailerButton.isHidden = statement
         addToFavoriteButton.customView?.isHidden = statement
+    }
+    
+    func setupAlertController(viewModelError: FilmDetailsViewModelProtocol?) {
+        let alertController = UIAlertController(title: "Service Error", message: viewModelError?.errorMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        
+        alertController.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor(named: "AccentColor")
+        alertController.view.tintColor = UIColor(named: "TintColor")
+        
+        present(alertController, animated: true)
     }
 }

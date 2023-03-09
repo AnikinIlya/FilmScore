@@ -8,6 +8,7 @@
 import Foundation
 
 protocol FilmsListViewModelProtocol {
+    var errorMessage: String? { get }
     func fetchFilms(from endpoint: Endpoints, searchWords: String, completion: @escaping() -> Void)
     func numberOfRows() -> Int
     func getFilmCellViewModel(at indexPath: IndexPath) -> FilmCellViewModelProtocol
@@ -16,6 +17,9 @@ protocol FilmsListViewModelProtocol {
 }
 
 class FilmsListViewModel: FilmsListViewModelProtocol {
+    //MARK: - Public Properties
+    var errorMessage: String?
+    
     //MARK: - Private Properties
     private var seriesList: [Series] = []
     private var series: Title?
@@ -26,6 +30,7 @@ class FilmsListViewModel: FilmsListViewModelProtocol {
             switch result {
             case .success(let data):
                 self?.seriesList = data.items
+                self?.errorMessage = data.errorMessage
                 completion()
             case .failure(let error):
                 print(error)

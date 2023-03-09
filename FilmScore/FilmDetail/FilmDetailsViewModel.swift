@@ -18,6 +18,7 @@ protocol FilmDetailsViewModelProtocol {
     var filmStars: String { get }
     var filmDirectors: String { get }
     var filmTrailer: String { get }
+    var errorMessage: String? { get }
     
     init(seriesId: String)
     
@@ -64,6 +65,8 @@ class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
         trailer?.videoUrl ?? ""
     }
     
+    var errorMessage: String?
+    
     //MARK: - Private Properties
     private var seriesId: String
     private var series: Title?
@@ -78,8 +81,9 @@ class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
     func fetchFilm(completion: @escaping() -> Void) {
         NetworkManager.shared.fetch(type: Title.self, endpoint: .title, titleId: seriesId) { [weak self] result in
             switch result {
-            case .success(let data):
-                self?.series = data
+            case .success(let seriesData):
+                self?.series = seriesData
+                self?.errorMessage = seriesData.errorMessage
                 self?.fetchTrailer()
                 completion()
             case .failure(let error):
@@ -88,12 +92,12 @@ class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
         }
     }
     
-    
     func fetchTrailer(){
         NetworkManager.shared.fetch(type: YouTubeTrailer.self, endpoint: .trailer, titleId: seriesId) {[weak self] result in
             switch result {
-            case .success(let data):
-                self?.trailer = data
+            case .success(let trailerData):
+                self?.trailer = trailerData
+                self?.errorMessage = trailerData.errorMessage
             case .failure(let error):
                 print(error)
             }

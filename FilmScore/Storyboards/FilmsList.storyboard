@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +18,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="f4o-Bx-umb">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                        <color key="backgroundColor" name="AccentColor"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="Casino3D-Regular" family="Casino 3D" pointSize="34"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -43,8 +44,8 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="MZ8-OF-vKs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="separatorColor" systemColor="systemYellowColor"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
+                        <color key="separatorColor" name="AccentColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="filmCell" id="QQ4-Ld-Mx9">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
@@ -66,7 +67,7 @@
                     <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="2pQ-CF-VKy"/>
                     <navigationItem key="navigationItem" title="FilmScore" largeTitleDisplayMode="never" id="uEw-SU-pxW">
                         <barButtonItem key="backBarButtonItem" title="Back" id="7Iy-b5-niF">
-                            <color key="tintColor" red="1" green="0.49019607840000001" blue="0.039215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" name="TintColor"/>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
@@ -143,7 +144,7 @@
                                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                        <color key="backgroundColor" name="AccentColor"/>
                                         <constraints>
                                             <constraint firstItem="NoV-br-WX8" firstAttribute="leading" secondItem="DoX-1y-hxK" secondAttribute="leading" constant="5" id="8OU-yT-FYA"/>
                                             <constraint firstItem="Z3n-bU-kkx" firstAttribute="leading" secondItem="DoX-1y-hxK" secondAttribute="leading" constant="5" id="R0y-Nw-Axv"/>
@@ -179,7 +180,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                <color key="backgroundColor" name="AccentColor"/>
                                 <constraints>
                                     <constraint firstItem="oqv-XV-qND" firstAttribute="leading" secondItem="bLT-cB-DOq" secondAttribute="leading" constant="5" id="00T-av-8vS"/>
                                     <constraint firstItem="eRe-hs-AAI" firstAttribute="leading" secondItem="bLT-cB-DOq" secondAttribute="leading" constant="5" id="E2E-Jh-Mzu"/>
@@ -197,8 +198,8 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Watch trailer">
                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="19"/>
-                                    <color key="baseForegroundColor" systemColor="systemYellowColor"/>
-                                    <color key="baseBackgroundColor" red="1" green="0.49019607840000001" blue="0.039215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="baseForegroundColor" name="AccentColor"/>
+                                    <color key="baseBackgroundColor" name="TintColor"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="whatchTrailerButtonPressed:" destination="TCB-5l-R5q" eventType="touchUpInside" id="QGG-KX-0vJ"/>
@@ -206,7 +207,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cJA-cF-W53"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
                             <constraint firstItem="cJA-cF-W53" firstAttribute="trailing" secondItem="bLT-cB-DOq" secondAttribute="trailing" constant="12" id="5AG-fS-mJx"/>
                             <constraint firstItem="WPR-K9-Imf" firstAttribute="top" secondItem="cJA-cF-W53" secondAttribute="top" constant="12" id="Tba-Jz-frQ"/>
@@ -221,7 +222,7 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="ayi-pc-zm1">
                         <barButtonItem key="rightBarButtonItem" style="done" id="5E5-gu-B7f">
                             <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
-                            <color key="tintColor" red="1" green="0.49019607840000001" blue="0.039215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" name="TintColor"/>
                             <connections>
                                 <action selector="addToFavoriteButtonPressed:" destination="TCB-5l-R5q" id="Tkj-lO-w2o"/>
                             </connections>
@@ -247,6 +248,15 @@
     <resources>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <namedColor name="AccentColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="BackgroundColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TintColor">
+            <color red="1" green="0.49019607840000001" blue="0.039215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

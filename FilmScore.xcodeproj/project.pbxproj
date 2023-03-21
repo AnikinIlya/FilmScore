@@ -22,6 +22,9 @@
 		096DD69929A5617B00E4F8DB /* FilmDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DD69829A5617B00E4F8DB /* FilmDetailsViewController.swift */; };
 		096DD69B29A7B75B00E4F8DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 096DD69A29A7B75B00E4F8DB /* LaunchScreen.storyboard */; };
 		096DD69F29AA75E600E4F8DB /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DD69E29AA75E600E4F8DB /* API.swift */; };
+		097D8BC229C8BB52006533B1 /* SearchCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D8BC129C8BB52006533B1 /* SearchCellViewModel.swift */; };
+		097D8BC429C8BB6E006533B1 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D8BC329C8BB6E006533B1 /* SearchCell.swift */; };
+		097D8BC629C8BB89006533B1 /* SearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 097D8BC529C8BB89006533B1 /* SearchCell.xib */; };
 		097FC47A299932870076CEF0 /* FilmsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097FC479299932870076CEF0 /* FilmsListViewModel.swift */; };
 		09C0A79829B7CA87000C3A68 /* Casino3D.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C0A79729B7CA86000C3A68 /* Casino3D.ttf */; };
 /* End PBXBuildFile section */
@@ -44,6 +47,9 @@
 		096DD69829A5617B00E4F8DB /* FilmDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDetailsViewController.swift; sourceTree = "<group>"; };
 		096DD69A29A7B75B00E4F8DB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		096DD69E29AA75E600E4F8DB /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		097D8BC129C8BB52006533B1 /* SearchCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellViewModel.swift; sourceTree = "<group>"; };
+		097D8BC329C8BB6E006533B1 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		097D8BC529C8BB89006533B1 /* SearchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCell.xib; sourceTree = "<group>"; };
 		097FC479299932870076CEF0 /* FilmsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsListViewModel.swift; sourceTree = "<group>"; };
 		09C0A79729B7CA86000C3A68 /* Casino3D.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Casino3D.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,12 +168,23 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		097D8BC029C8BB23006533B1 /* SearchCell */ = {
+			isa = PBXGroup;
+			children = (
+				097D8BC329C8BB6E006533B1 /* SearchCell.swift */,
+				097D8BC129C8BB52006533B1 /* SearchCellViewModel.swift */,
+				097D8BC529C8BB89006533B1 /* SearchCell.xib */,
+			);
+			path = SearchCell;
+			sourceTree = "<group>";
+		};
 		097FC477299932030076CEF0 /* FilmsList */ = {
 			isa = PBXGroup;
 			children = (
 				096DD68C29A5042C00E4F8DB /* FilmsListViewController.swift */,
 				097FC479299932870076CEF0 /* FilmsListViewModel.swift */,
 				096DD658299A5E6200E4F8DB /* FilmCell */,
+				097D8BC029C8BB23006533B1 /* SearchCell */,
 			);
 			path = FilmsList;
 			sourceTree = "<group>";
@@ -233,6 +250,7 @@
 				096DD68B29A503D800E4F8DB /* FilmCell.xib in Resources */,
 				0959FB8629965AD300F3A20B /* Assets.xcassets in Resources */,
 				096DD69B29A7B75B00E4F8DB /* LaunchScreen.storyboard in Resources */,
+				097D8BC629C8BB89006533B1 /* SearchCell.xib in Resources */,
 				09C0A79829B7CA87000C3A68 /* Casino3D.ttf in Resources */,
 				096DD68929A503B500E4F8DB /* FilmsList.storyboard in Resources */,
 			);
@@ -245,8 +263,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				097D8BC229C8BB52006533B1 /* SearchCellViewModel.swift in Sources */,
 				097FC47A299932870076CEF0 /* FilmsListViewModel.swift in Sources */,
 				0959FB7D29965ACB00F3A20B /* AppDelegate.swift in Sources */,
+				097D8BC429C8BB6E006533B1 /* SearchCell.swift in Sources */,
 				096DD657299A5E5D00E4F8DB /* FilmCell.swift in Sources */,
 				096DD69929A5617B00E4F8DB /* FilmDetailsViewController.swift in Sources */,
 				096DD69429A5594300E4F8DB /* FilmDetailsViewModel.swift in Sources */,

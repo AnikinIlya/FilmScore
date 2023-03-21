@@ -59,7 +59,7 @@ class FilmDetailsViewController: UIViewController {
     }
 }
 
-//MARK: - Extensions
+//MARK: - Setting View
 private extension FilmDetailsViewController {
     func setupUI() {
         self.title = viewModel.filmTitle

@@ -7,6 +7,7 @@
 
 import Foundation
 
+//MARK: - FilmCellViewModelProtocol
 protocol FilmCellViewModelProtocol {
     var imageData: Data? { get }
     var title: String { get }
@@ -16,6 +17,7 @@ protocol FilmCellViewModelProtocol {
     init (film: Series)
 }
 
+//MARK: - FilmCellViewModel
 class FilmCellViewModel: FilmCellViewModelProtocol {
     //MARK: - Privae Properties
     private let film: Series
@@ -37,7 +39,7 @@ class FilmCellViewModel: FilmCellViewModelProtocol {
         film.imDbRating ?? "Not rated"
     }
     
-    //MARK: - Initializers
+    //MARK: - Initializer
     required init(film: Series) {
         self.film = film
     }

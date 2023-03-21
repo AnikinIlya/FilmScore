@@ -1,30 +1,28 @@
 //
-//  FilmCell.swift
+//  SearchCell.swift
 //  FilmScore
 //
-//  Created by Anikin Ilya on 13.02.2023.
+//  Created by Anikin Ilya on 20.03.2023.
 //
 
 import UIKit
 
-//MARK: - FilmCell
-class FilmCell: UITableViewCell {
+//MARK: - SearchCell
+class SearchCell: UITableViewCell {
     //MARK: - IBOutlets
     @IBOutlet var posterImage: UIImageView!
     @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var crewLabel: UILabel!
-    @IBOutlet var ratingLabel: UILabel!
-    
+    @IBOutlet var descriptionLabel: UILabel!
+
     //MARK: - Public Properties
-    var viewModel: FilmCellViewModelProtocol! {
+    var viewModel: SearchCellViewModelProtocol! {
         didSet {
             guard let imageData = viewModel.imageData else { return }
             posterImage.image = UIImage(data: imageData)
             
             titleLabel.text = viewModel.title
-            crewLabel.text = viewModel.crew
-            ratingLabel.text = "⭐️" + viewModel.rating
+            descriptionLabel.text = viewModel.description
         }
     }
-}
 
+}

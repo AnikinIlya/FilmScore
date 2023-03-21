@@ -72,7 +72,7 @@ class FilmDetailsViewModel: FilmDetailsViewModelProtocol {
     private var series: Title?
     private var trailer: YouTubeTrailer?
     
-    //MARK: - Initializers
+    //MARK: - Initializer
     required init(seriesId: String) {
         self.seriesId = seriesId
     }

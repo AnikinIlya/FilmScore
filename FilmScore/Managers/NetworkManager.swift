@@ -34,7 +34,7 @@ class NetworkManager {
     //MARK: - Private Properties
     private let apiKey = API().apiKey
     
-    //MARK: - Initializers
+    //MARK: - Initializer
     private init() {}
     
     //MARK: - Public Methods

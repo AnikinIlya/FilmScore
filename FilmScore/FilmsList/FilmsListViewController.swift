@@ -12,6 +12,13 @@ class FilmsListViewController: UITableViewController {
     
     //MARK: - Private Properties
     private let searchController = UISearchController(searchResultsController: nil)
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    private var searchBarIsFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
     
     private var topMenu = UIMenu()
     private var activityIndicator: UIActivityIndicatorView?
@@ -22,7 +29,7 @@ class FilmsListViewController: UITableViewController {
             viewModel.clearResults()
             self.tableView.reloadData()
             
-            viewModel.fetchFilms(from: endpoint, searchWords: "") { [weak self] in
+            viewModel.fetchFilms(from: endpoint) { [weak self] in
                 if self?.viewModel.errorMessage == "" {
                     self?.tableView.reloadData()
                 } else {
@@ -35,7 +42,7 @@ class FilmsListViewController: UITableViewController {
     
     private var viewModel: FilmsListViewModelProtocol! {
         didSet {
-            viewModel.fetchFilms(from: endpoint, searchWords: "") { [weak self] in
+            viewModel.fetchFilms(from: endpoint) { [weak self] in
                 if self?.viewModel.errorMessage == "" {
                     self?.tableView.reloadData()
                 } else {
@@ -59,8 +66,15 @@ class FilmsListViewController: UITableViewController {
         filmDetail.viewModel = sender as? FilmDetailsViewModelProtocol
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.numberOfRows()
+        if searchBarIsFiltering {
+                return viewModel.numberOfRowsForSearchCell()
+        }
+        return viewModel.numberOfRowsForFilmCell()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -68,16 +82,30 @@ class FilmsListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = Bundle.main.loadNibNamed("FilmCell", owner: self)?.first
-        guard let cell = cell as? FilmCell else { return UITableViewCell() }
-        cell.viewModel = viewModel.getFilmCellViewModel(at: indexPath)
         
-        return cell
+        if searchBarIsFiltering {
+            let cell = Bundle.main.loadNibNamed("SearchCell", owner: self)?.first
+            guard let cell = cell as? SearchCell else { return UITableViewCell() }
+            cell.viewModel = viewModel.getSearchCellViewModel(at: indexPath)
+            
+            return cell
+        } else {
+            let cell = Bundle.main.loadNibNamed("FilmCell", owner: self)?.first
+            guard let cell = cell as? FilmCell else { return UITableViewCell() }
+            cell.viewModel = viewModel.getFilmCellViewModel(at: indexPath)
+            
+            return cell
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let filmDetailsViewModel = viewModel.getFilmDetailsViewModel(at: indexPath)
+        var filmDetailsViewModel: FilmDetailsViewModelProtocol
+        if searchBarIsFiltering {
+            filmDetailsViewModel = viewModel.getFilmDetailsViewModelForSearchCell(at: indexPath)
+        } else {
+            filmDetailsViewModel = viewModel.getFilmDetailsViewModelForFilmCell(at: indexPath)
+        }
         performSegue(withIdentifier: "showDetails", sender: filmDetailsViewModel)
     }
 }
@@ -85,31 +113,33 @@ class FilmsListViewController: UITableViewController {
 //MARK: - UISearchResultsUpdating
 extension FilmsListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let _ = searchController.searchBar.text else { return }
-        
+        guard let searchText = searchController.searchBar.text else { return }
+        getSearchResult(searchText)
     }
     
-    private func getSearchResult() {
+    func getSearchResult(_ searchText: String) {
+        self.activityIndicator?.startAnimating()
+        viewModel.clearResults()
+        self.tableView.reloadData()
         
+        viewModel.fetchSearchResults(searchText: searchText) { [weak self] in
+            if self?.viewModel.errorMessage == "" {
+                self?.tableView.reloadData()
+            } else {
+                self?.setupAlertController(viewModelError: self?.viewModel)
+            }
+            self?.activityIndicator?.stopAnimating()
+        }
     }
 }
 
 //MARK: - Setting View
-private extension FilmsListViewController {
+extension FilmsListViewController {
     func setupView() {
         self.title = "Top 250 Movies"
         activityIndicator = setupActivityIndicator(in: view)
         setupSearchController()
         setupTopMenu()
-    }
-    
-    func setupSearchController(){
-        navigationItem.searchController = searchController
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        definesPresentationContext = true
-        searchController.searchBar.barTintColor = .systemYellow
-        searchController.searchBar.tintColor = .black
     }
     
     func setupActivityIndicator(in view: UIView) -> UIActivityIndicatorView {
@@ -122,6 +152,15 @@ private extension FilmsListViewController {
         view.addSubview(activityIndicator)
         
         return activityIndicator
+    }
+    
+    func setupSearchController(){
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        searchController.searchBar.barTintColor = .systemYellow
+        searchController.searchBar.tintColor = .black
     }
     
     func setupTopMenu() {

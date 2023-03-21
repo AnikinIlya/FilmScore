@@ -11,7 +11,7 @@ class ImageManager {
     //MARK: - Public Properties
     static let shared = ImageManager()
     
-    //MARK: - Initializers
+    //MARK: - Initializer
     private init() {}
     
     //MARK: - Public Methods
